@@ -1,588 +1,612 @@
-<HTML><Title>Lightware MiniWeb</Title><HEAD><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="apple-mobile-web-app-title" content="MiniWeb" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="mobile-web-app-capable" content="yes" /><meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui, minimum-scale = 1, maximum-scale = 1, user-scalable = no" /><meta name="apple-mobile-web-app-status-bar-style" content="black" /><style>.logger {height: 15vmin;width: 80vw;color: #000a;position: absolute;bottom: 0px;margin: auto;border: 0.1em #2e3848 solid;border-bottom: 0;border-radius: 1em 1em 0 0;left: 10vw;box-shadow: 0.1em 0.2em 1em -0.2em #0005;visibility: hidden;background: linear-gradient(175deg, #f3f4f4 0%, #e6e7e8 100%);padding: 0.5em;overflow: hidden;}.logger p {margin: 0.2em;font-size: 1.5vmin;color: #2e3848;}/* Navigator arrows */.arrow_up, .arrow_down, .arrow_left, .arrow_right {width: 0; height: 0; border: 1em solid transparent;margin: 0.06125em;position:relative;}.arrow_up {border-bottom: 1em solid rgba(255,255,255,0.25);transform: rotate(-45deg) translateX(-1em) translateY(0.5em);}.arrow_down {border-top: 1em solid rgba(255,255,255,0.25);transform: rotate(-45deg) translateX(-1em) translateY(1.5em);}.arrow_right {border-left: 1em solid rgba(255,255,255,0.25);transform: rotate(-45deg) translateX(-0.5em) translateY(1em);}.arrow_left {border-right:1em solid rgba(255,255,255,0.25); transform: rotate(-45deg) translateX(-1.5em) translateY(1em);}/* Navigator */.widget_Navigator{cursor: pointer;position: relative;width: 10em;height: 10em;transform: rotate(45deg);margin: 0.5em;}.widget_Navigator_ring, .widget_Navigator_ring_up, .widget_Navigator_ring_down, .widget_Navigator_ring_left, .widget_Navigator_ring_right, .widget_Navigator_ring_center {position: absolute;width: 50%;height: 50%;}.widget_Navigator_ring_up, .widget_Navigator_ring_down, .widget_Navigator_ring_left, .widget_Navigator_ring_right {margin: -0.06125em;}.widget_Navigator_ring_up{top: 0;left: 0;border-radius: 100% 10% 0% 10%;background: linear-gradient(315deg, #1c2834 33%, #1c2834cc 100%);}.widget_Navigator_ring_right{top: 0;right: 0;border-radius: 10% 100% 10% 0%;background: linear-gradient(45deg, #1c2834 33%, #1c2834cc 100%);}.widget_Navigator_ring_left{bottom: 0;left: 0;border-radius: 10% 0% 10% 100%;background: linear-gradient(225deg, #1c2834 33%, #1c2834cc 100%);}.widget_Navigator_ring_down{bottom: 0;right: 0;border-radius: 0% 10% 100% 10%;background: linear-gradient(135deg, #1c2834 33%, #1c2834cc 100%);}.widget_Navigator_ring_center{top: 25%;left: 25%;border-radius: 50%;background: radial-gradient(#fff 0%, #1c2834 100%);}/* Slider */.widget_Slider {-webkit-appearance: none;width: 100%;height: 2vmin;border-radius: 1em;background: #a7a9ac;outline: none;}.widget_Slider::-webkit-slider-thumb {-webkit-appearance: none;appearance: none;width: 6vmin;height: 6vmin;border-radius: 50%; background: #2e3848;cursor: pointer;box-shadow: 0.1em 0.2em 1em -0.2em #a7a9ac, inset 1em 1em 2em 0.1em #00000030, inset -1em -1em 3em 0.1em #ffffff30;}.widget_Slider::-moz-range-thumb {width: 6vmin;height: 6vmin;border-radius: 50%;background: #2e3848;cursor: pointer;box-shadow: inset 1em 1em 2em 0.1em #00000030, inset -1em -1em 3em 0.1em #ffffff30;} html, body { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; color: #58595b; -webkit-font-smoothing: antialiased; font-family: "Roboto",sans-serif; margin: 0; border: 0; padding: 0; background: linear-gradient(175deg, #f3f4f4 0%, #e6e7e8 100%); background-color: #333; background-image: linear-gradient(335deg, #9e0b0fff 23px, transparent 23px), linear-gradient(155deg, #9e0b0fbf 23px, transparent 23px), linear-gradient(335deg, #9e0b0ff0 23px, transparent 23px), linear-gradient(155deg, #9e0b0fb0 23px, transparent 23px); background-size: 58px 58px; background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px; }}bg {position:absolute;top:0;background: radial-gradient(ellipse at center, $color 0%, darken($color, 50%) 100%);overflow: hidden;  }.noscreen {visibility: hidden;display: none;}.device {width:100%;height:100%;vertical-align:middle;text-align:-webkit-center;display: flex;justify-content: center;align-items: center;position:absolute;top:0;}.device_panelopen {}.paneliconcontainer {justify-content: center;margin-top:auto;margin-bottom:auto;}.paneliconcontainer_noscreen {display: none;}.panelicon {cursor: pointer;color:rgba(255,255,255,1);font-size:3vmin;margin: 1em;position: relative;justify-content: center;vertical-align:middle;align-items:center;text-align:-webkit-center;height: 24vmin;width: 24vmin;border-radius: 50%;padding: 0.5em;box-shadow: 0.1em 0.2em 1em -0.2em #0005, inset 1em 1em 2em 0.1em #00000030, inset -1em -1em 3em 0.1em #ffffff30;display:inline-flex;}.panel {vertical-align:middle;align-items:center;text-align:-webkit-center;margin: auto;margin-top:20px;position: relative;justify-content: center;max-width: 120vmin;min-width: 90vmin;width: auto;white-space: nowrap;font-size:2.5vmin;border-radius: 0.5em;padding: 0em;box-shadow: 0.1em 0.2em 1em -0.2em #0005;background: linear-gradient(175deg, #f3f4f4 0%, #e6e7e8 100%);margin-top:auto;margin-bottom:auto;}.panel_hiderow {max-width: 90vmin;min-width: 60vmin;width: auto;white-space: nowrap;}.paneltab {cursor: pointer;position: relative;justify-content: center;width:100%;display:flex;border-radius: 0.6em 0.6em 0em 0em;padding: 0em;margin-top:auto;margin-bottom:auto;background:#a7a9ac;}.page {justify-content: center;border-radius: 0.5em;padding: .25em;}.pagetab {overflow:hidden;position: relative;justify-content: center;width:100%;border-radius: 0.5em 0.5em 0em 0em;padding: 1em;border-bottom: 0.05em solid rgba(0, 0, 0, 0.16);font-size:3vmin;background:transparent;}.pagetab_selected {overflow:visible;background:#f3f4f4;font-weight:bold;box-shadow: -0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3), 0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3)}.pagetab_selected:last-child {box-shadow: -0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3)}.pagetab_selected:first-child {box-shadow: 0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3)}.pagetab_selected:last-child:first-child {box-shadow: 0em 0em 0em 0em rgba(0,0,0,0)}.pagetab_selected:default {box-shadow: -0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3), 0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3)}.row {margin: 0.125em;display: flex;justify-content: center;}.rowlabel {width:40%;padding-left: 1em;position: relative;justify-content: left;display:grid;vertical-align:middle;align-items:center;text-align:-webkit-center;}.rowwidgetcontainer {width:60%;display: flex;float:right;justify-content:center;}.rowlabel_hiderow {display:none;}.rowwidgetcontainer_hiderow {width:100%;display: flex;float:right;justify-content:center;}.button, .Button {cursor: pointer;height: 1em;color: #fff;background: linear-gradient(125deg, #1c2834 33%, #1c2834cc 100%);}.active {cursor: pointer;background: linear-gradient(125deg, rgba(28,40,52,1) 33%, rgba(28,40,52,0.8) 100%);}.inactive {color: #58595b;background: linear-gradient(125deg, #a7a9ac 33%, #a7a9accc 100%);}.inactive > div > small::after {line-height: 1em;font-size: 0.8em;content:"Connect the cable to your device";}.selected {background: linear-gradient(125deg, #9e0b0f 33%, #9e0b0fcc 100%);cursor: pointer;}.inactive.selected {color: #ffffff7f;background: linear-gradient(125deg, #9e0b0f 33%, #9e0b0fcc 100%);}.inactive.selected > div > small::after {line-height: 1em;font-size: 0.8em;content:"Connect the cable to your device";}.toggle.panelicon, .toggle.active, .toggle.widget, .toggle.widget_Icon, .toggle.widget_Navigator_ring_up, .toggle.widget_Navigator_ring_down, .toggle.widget_Navigator_ring_left, .toggle.widget_Navigator_ring_right, .toggle.widget_Navigator_ring_center {animation: shakeactive 0.2s;}@keyframes shakeactive {0% { transform: scale(1) }33% { transform: scale(0.95) }100% { transform: scale(1) }}.toggle.inactive {animation: shakeinactive 0.3s;}@keyframes shakeinactive {0% { transform: translateX(-12px) }10% { transform: translateX(0px) }20% { transform: translateX(10px) }30% { transform: translateX(0px) }40% { transform: translateX(-8px) }50% { transform: translateX(0px) }60% { transform: translateX(6px) }70% { transform: translateX(0px) }80% { transform: translateX(-4px) }90% { transform: translateX(2px) }100% { transform: translateX(0px) }0% { transform: translateX(0px) }}.text {}.widget_Button, .widget_Text, .widget_Icon, .widget, .widget_Slider_container {margin: 0px;margin-left: 0.06125em;margin-right: 0.06125em;display: flex;float: right;justify-content: center;padding: 1em;}.widget, .widget_Slider_container {height: 1em;width: 100%;border-radius: 0.25em;}.widget_Button {width: 100%;border-radius: 0.25em;color: #fff;background: linear-gradient(125deg, rgba(28,40,52,1) 33%, rgba(28,40,52,0.8) 100%);}.widget_Text {width: 100%;border-radius: 0.25em;}.widget_Icon {cursor: pointer;width: 1.2em;height: 1.2em;border-radius: 50%;background: linear-gradient(125deg, #1c2834 33%, #1c2834cc 100%);color: #fff;}.widget_IconGap {width: 1em;color: #fff;}.hidden {display:none;visibility:hidden;}::-webkit-scrollbar {width: 2em;}::-webkit-scrollbar-track {box-shadow: inset 0 0 0.5em grey; border-radius: 1em;}::-webkit-scrollbar-thumb {background: #2e3848;border-radius: 1em;}::-webkit-scrollbar-thumb:hover {background: #b30000; }.prompt {position:absolute;font-size:2.5vmin;border-radius: 0.5em;box-shadow: 0.1em 0.2em 1em -0.2em #0005;background: linear-gradient(175deg, #f3f4f4 0%, #e6e7e8 100%);width: 90vmin;white-space: nowrap;padding:0.25em;max-height:80vh;overflow: auto;}.prompt_title { font-size: 3vmin; padding: 1em; border-bottom: 0.05em solid rgba(0, 0, 0, 0.16);}.prompt_text {font-size:2.5vmin; padding:1em;}.prompt_pin, .prompt_input {font-size:2.5vmin;padding: 1em;border: 1px solid rgba(0, 0, 0, 0.16);text-align: center;height: 2em;width: -webkit-fill-available;border-radius: 0.5em;text-align: center;margin: 0.06125em;color:#385c80;background: #fff;}.prompt_option {color: #f3f4f4;background: linear-gradient(125deg, #808285 33%, #808285cc 100%);margin: 0.06125em;height: 1em;display: flex;float: right;justify-content: center;width: -webkit-fill-available;border-radius: 0.5em; padding: 1em 0em 1em 0em;}</style><script>var rto = 10000;var rtot;var nX;var nY;var uW;var uH;var pt;function onLoad(){var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');svg.setAttribute('width',window.innerWidth);svg.setAttribute('height',window.innerHeight);document.querySelector('#bg').innerHTML="";if (UserInterface.Background.Clean == true) {}else {if (UserInterface.Background.UsePicture == true) {if(typeof(UserInterface.Background.Background)!=='undefined') {if(UserInterface.Background.Background.match('data:image') != null) {var backgroundpic = document.createElement('IMG');backgroundpic.style='object-fit: cover; width: 100vw; height: 100vh; object-position: 50% 50%; opacity:'+UserInterface.Background.Opacity+'%';backgroundpic.src = UserInterface.Background.Background;document.querySelector('#bg').appendChild(backgroundpic);}}}else {document.querySelector('#bg').appendChild(svg);}}var defs = document.createElementNS('http://www.w3.org/2000/svg','defs');svg.appendChild(defs);var unitSize = (window.innerWidth+window.innerHeight)/20;nX = Math.ceil(window.innerWidth/unitSize)+1;nY = Math.ceil(window.innerHeight/unitSize)+1;uW = Math.ceil(window.innerWidth/(nX-1));uH = Math.ceil(window.innerHeight/(nY-1));pt = [];for(var y = 0; y < nY; y++) {for(var x = 0; x < nX; x++) {pt.push({x:uW*x, y:uH*y, originX:uW*x, originY:uH*y});}}randomize();for(var i = 0; i < pt.length; i++) {if(pt[i].originX != uW*(nX-1) && pt[i].originY != uH*(nY-1)) {            var tLX = pt[i].x;            var tLY = pt[i].y;            var tRX = pt[i+1].x;            var tRY = pt[i+1].y;            var bLX = pt[i+nX].x;            var bLY = pt[i+nX].y;            var bRX = pt[i+nX+1].x;            var bRY = pt[i+nX+1].y;            var rando = Math.floor(Math.random()*2);            for(var n = 0; n < 2; n++) {                var p = document.createElementNS(svg.namespaceURI, 'polygon');                if(rando==0) {                    if(n==0) { p.p1 = i; p.p2 = i+nX; p.p3 = i+nX+1; p.setAttribute('points',tLX+','+tLY+' '+bLX+','+bLY+' '+bRX+','+bRY);}else if(n==1) { p.p1 = i; p.p2 = i+1; p.p3 = i+nX+1; p.setAttribute('points',tLX+','+tLY+' '+tRX+','+tRY+' '+bRX+','+bRY);}                } else if(rando==1) {                    if(n==0) { p.p1 = i; p.p2 = i+nX; p.p3 = i+1; p.setAttribute('points',tLX+','+tLY+' '+bLX+','+bLY+' '+tRX+','+tRY);}else if(n==1) { p.p1 = i+nX; p.p2 = i+1; p.p3 = i+nX+1; p.setAttribute('points',bLX+','+bLY+' '+tRX+','+tRY+' '+bRX+','+bRY);}                }p.setAttribute('fill','url(#g'+i+')');                var q = document.createElementNS('http://www.w3.org/2000/svg','animate');                q.setAttribute('fill','freeze');                q.setAttribute('attributeName','points');                q.setAttribute('dur',rto+'ms');                q.setAttribute('calcMode','linear');                p.appendChild(q);                svg.appendChild(p);            }var lG = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');lG.setAttribute('id','g'+i);lG.setAttribute('x1','100%');lG.setAttribute('y1','100%');lG.setAttribute('x2','0%');lG.setAttribute('y2','0%');var alpha = Math.random();var dark = (parseFloat(240)-(alpha*6));var light = (parseFloat(255)-(alpha*4));var st = document.createElementNS('http://www.w3.org/2000/svg','stop');st.setAttribute('offset','0%');st.setAttribute('style',"stop-color:rgba("+(light)+","+(light)+","+(light)+",1);stop-opacity:1");lG.appendChild(st);var sp = document.createElementNS('http://www.w3.org/2000/svg','stop');sp.setAttribute('offset','100%');sp.setAttribute('style',"stop-color:rgba("+(dark)+","+(dark)+","+(dark)+",1);stop-opacity:1");lG.appendChild(sp);defs.appendChild(lG);        }    }if (UserInterface.Background.Clean == true) {}else {if (UserInterface.Background.UsePicture == true) {}else {setTimeout(refresh(),10);}}    }function randomize() {for(var i = 0; i < pt.length; i++) {if(pt[i].originX != 0 && pt[i].originX != uW*(nX-1)) {pt[i].x = pt[i].originX + Math.random()*uW-uW/2;}if(pt[i].originY != 0 && pt[i].originY != uH*(nY-1)) {pt[i].y = pt[i].originY + Math.random()*uH-uH/2;}}}function refresh() {randomize();for(var i = 1; i < document.querySelector('#bg svg').childNodes.length; i++) {var p = document.querySelector('#bg svg').childNodes[i];var q = p.childNodes[0];if(q.getAttribute('to')) {q.setAttribute('from',q.getAttribute('to'));}q.setAttribute('to',pt[p.p1].x+','+pt[p.p1].y+' '+pt[p.p2].x+','+pt[p.p2].y+' '+pt[p.p3].x+','+pt[p.p3].y);q.beginElement();}rtot = setTimeout(function() {refresh();}, rto);}function onResize() {document.querySelector('#bg svg').remove();clearTimeout(rtot);onLoad();}window.onopen = console.log('Opened');window.onload = onLoad;window.onresize = onResize;
-
-
-
-/* This file generated with the Lightware MiniWeb Room Control Configurator.                */
-/* The UserInterface, Triggers and settings objects can be changed to customize your setup.   */
-/* Please do not change any other part of the file because it can break the user interface. */
-
-
-/* This file generated with the Lightware MiniWeb Room Control Configurator.                */
-/* The UserInterface, Triggers and settings objects can be changed to customize your setup.   */
-/* Please do not change any other part of the file because it can break the user interface. */
-
-var UserInterface = {
-	"Version": "Under test",
-	"Panels": [{
-		"PanelId": "lw-presentation",
-		"Type": "Home",
-		"Icon": "Tv",
-		"Order": "1",
-		"Color": "#007ce8",
-		"Name": "Video Switcher",
-		"Pages": [{
-			"ID": "lw-lwpresentation-page-0",
-			"Name": "HDMI out 1",
-			"Options": "hideRowNames=1;",
-			"Rows": [{
-				"Name": "USB-C in 1",
-				"Widgets": [{
-					"WidgetId": "widget_IN1toOUT1",
-					"Name": "USB-C in 1",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "USB-C in 2",
-				"Widgets": [{
-					"WidgetId": "widget_IN2toOUT1",
-					"Name": "USB-C in 2",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "HDMI in 3",
-				"Widgets": [{
-					"WidgetId": "widget_IN3toOUT1",
-					"Name": "HDMI in 3",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "HDMI in 4",
-				"Widgets": [{
-					"WidgetId": "widget_IN4toOUT1",
-					"Name": "HDMI in 4",
-					"Type": "Button"
-				}]
-			},{
-				"Name": "ClosePanel",
-				"Widgets": [{
-					"WidgetId": "txt-lw-out2-lw",
-					"Name": "alpha tester unofficial not for customer setup tool",
-					"Type": "Text"
-				}]
-			}]
-		}, {
-			"ID": "lw-lwpresentation-page-1",
-			"Name": "HDMI out 2",
-			"Options": "hideRowNames=1;",
-			"Rows": [{
-				"Name": "USB-C in 1",
-				"Widgets": [{
-					"WidgetId": "widget_IN1toOUT2",
-					"Name": "USB-C in 1",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "USB-C in 2",
-				"Widgets": [{
-					"WidgetId": "widget_IN2toOUT2",
-					"Name": "USB-C in 2",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "HDMI in 3",
-				"Widgets": [{
-					"WidgetId": "widget_IN3toOUT2",
-					"Name": "HDMI in 3",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "HDMI in 4",
-				"Widgets": [{
-					"WidgetId": "widget_IN4toOUT2",
-					"Name": "HDMI in 4",
-					"Type": "Button"
-				}]
-			},{
-				"Name": "ClosePanel",
-				"Widgets": [{
-					"WidgetId": "txt-lw-out2-lw",
-					"Name": "alpha tester unofficial not for customer setup tool",
-					"Type": "Text"
-				}]
-			}]
-		}]
-	},
-	
-	
-	{
-		"PanelId": "lw-audio-sw",
-		"Type": "Home",
-		"Icon": "Tv",
-		"Order": "1",
-		"Color": "#e85700",
-		"Name": "Audio Switcher",
-		"Pages": [{
-			"ID": "lw-audio-page-0",
-			"Name": "Analog Audio O3",
-			"Options": "hideRowNames=1;",
-			"Rows": [{
-				"Name": "USB-C in 1",
-				"Widgets": [{
-					"WidgetId": "o3_i1",
-					"Name": "USB-C in 1",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "USB-C in 2",
-				"Widgets": [{
-					"WidgetId": "o3_i2",
-					"Name": "USB-C in 2",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "HDMI in 3",
-				"Widgets": [{
-					"WidgetId": "o3_i3",
-					"Name": "HDMI in 3",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "HDMI in 4",
-				"Widgets": [{
-					"WidgetId": "o3_i4",
-					"Name": "HDMI in 4",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "Volume",
-				"Widgets": [{
-			 
-						"WidgetId": "o3_slider",
-						"Name": "Volume",
-						"Type": "Slider"
-				}]
-			}, {
-				"Name": "Mute",
-				"Widgets": [{
-					"WidgetId": "o3_mute",
-					"Name": "Mute",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "o3_unmute",
-					"Name": "Unmute",
-					"Type": "Button"
-				}]
-			}]
-		}]
-	},	
-
-	{
-		"PanelId": "lw-usb-sw",
-		"Type": "Home",
-		"Icon": "Tv",
-		"Order": "1",
-		"Color": "#a500e8",
-		"Name": "USB Switcher",
-		"Pages": [{
-			"ID": "lw-usb-page-0",
-			"Name": "USB H1",
-			"Options": "hideRowNames=1;",
-			"Rows": [{
-				"Name": "USB-C Host 1",
-				"Widgets": [{
-					"WidgetId": "h1_u1",
-					"Name": "USB-C in 1",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "USB-C Host 2",
-				"Widgets": [{
-					"WidgetId": "h1_u2",
-					"Name": "USB-C in 2",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "USB-B Host 3",
-				"Widgets": [{
-					"WidgetId": "h1_u3",
-					"Name": "HDMI in 3",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "USB-B Host 4",
-				"Widgets": [{
-					"WidgetId": "h1_u4",
-					"Name": "HDMI in 4",
-					"Type": "Button"
-				}]
-			}]
-		}]
-	},					
-	
-	
-	
-	
-	
-	
-	
-	{
-		"PanelId": "lw-conf",
-		"Type": "Home",
-		"Icon": "Tv",
-		"Order": "1",
-		"Color": "#31c502",
-		"Name": "Autoselect Configuration",
-		"Pages": [{
-			"ID": "lw-v-as-conf",
-			"Name": "Video",
-			"Options": "",
-			"Rows": [{
-				"Name": "HDMI out 1",
-				"Widgets": [{
-					"WidgetId": "v_as_off_o1",
-					"Name": "Off",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "v_as_ld_o1",
-					"Name": "Last detect",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "v_as_fd_o1",
-					"Name": "First detect",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "HDMI out 1",
-				"Widgets": [{
-					"WidgetId": "v_as_off_o2",
-					"Name": "Off",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "v_as_ld_o2",
-					"Name": "Last detect",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "v_as_fd_o3",
-					"Name": "First detect",
-					"Type": "Button"
-				}]
-			},{
-				"Name": "ClosePanel",
-				"Widgets": [{
-					"WidgetId": "txt-lw-out2-lw",
-					"Name": "alpha tester unofficial not for customer setup tool",
-					"Type": "Text"
-				}]
-			}]
-		},{
-			"ID": "lw-a-as-conf",
-			"Name": "Audio",
-			"Options": "",
-			"Rows": [{
-				"Name": "Policy",
-				"Widgets": [{
-					"WidgetId": "a_as_off_o3",
-					"Name": "Off",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "a_as_fv_o3",
-					"Name": "Video follow",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "VideoFollowPort",
-				"Widgets": [{
-					"WidgetId": "a_as_fv_o3_o1",
-					"Name": "O1",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "a_as_fv_o3_o2",
-					"Name": "O2",
-					"Type": "Button"
-				}]
-			},{
-				"Name": "ClosePanel",
-				"Widgets": [{
-					"WidgetId": "txt-lw-out2-lw",
-					"Name": "alpha tester unofficial not for customer setup tool",
-					"Type": "Text"
-				}]
-			}]
-		},{
-			"ID": "lw-u-as-conf",
-			"Name": "USB",
-			"Options": "",
-			"Rows": [{
-				"Name": "Policy",
-				"Widgets": [{
-					"WidgetId": "u_as_off_h1",
-					"Name": "Off",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "u_as_fv_h1",
-					"Name": "Video follow",
-					"Type": "Button"
-				}]
-			}, {
-				"Name": "VideoFollowPort",
-				"Widgets": [{
-					"WidgetId": "u_as_fv_h1_o1",
-					"Name": "O1",
-					"Type": "Button"
-				},
-				{
-					"WidgetId": "u_as_fv_h1_o2",
-					"Name": "O2",
-					"Type": "Button"
-				}]
-			},{
-				"Name": "ClosePanel",
-				"Widgets": [{
-					"WidgetId": "txt-lw-out2-lw",
-					"Name": "alpha tester unofficial not for customer setup tool",
-					"Type": "Text"
-				}]
-			}]
-		},]
-	},				
-	{
-		"PanelId": "lw-cpu",
-		"Type": "Home",
-		"Icon": "Tv",
-		"Order": "1",
-		"Color": "#bd0000",
-		"Name": "System Information",
-		"Pages": [{
-			"ID": "lw-cpu-page",
-			"Name": "Measurements",
-			"Options": "",
-			"Rows": [{
-				"Name": "Temperature of processor (Celsius)",
-				"Widgets": [{
-					"WidgetId": "cpu_temp",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "Product DC input (24V nominal)",
-				"Widgets": [{
-					"WidgetId": "DC_IN_24V",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "Power distribution rail, HDMI and USB (5V nominal)",
-				"Widgets": [{
-					"WidgetId": "GENERAL_5V",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "Common chip I/O supply (3.3V nominal)",
-				"Widgets": [{
-					"WidgetId": "GENERAL_3V3",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "1.2V supply of USB HUB and video functions",
-				"Widgets": [{
-					"WidgetId": "VIDEO_USB_1V2",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "1.05V supply of video functions",
-				"Widgets": [{
-					"WidgetId": "VIDEO_1V05",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "1.00V supply of video functions",
-				"Widgets": [{
-					"WidgetId": "VIDEO_1V",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			}]
-		},
-{
-			"ID": "lw-cpu-page-2",
-			"Name": "Unit Descriptions",
-			"Options": "",
-			"Rows": [{
-				"Name": "ManufacturerName",
-				"Widgets": [{
-					"WidgetId": "ManufacturerName",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "ProductName",
-				"Widgets": [{
-					"WidgetId": "ProductName",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "PartNumber",
-				"Widgets": [{
-					"WidgetId": "PartNumber",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "SerialNumber",
-				"Widgets": [{
-					"WidgetId": "SerialNumber",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			},{
-				"Name": "PackageVersion",
-				"Widgets": [{
-					"WidgetId": "PackageVersion",
-					"Name": "?",
-					"Type": "Text"
-				}]
-			}]
-		}]
-	}				
-	],
-	"RoomName": "Taurus UCX-4x2-HC30",
-	"Logo": "data:image/png;base64,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",
-	"PasswordRequired": "No",
-	"Password": "811c9dc5",
-	"Background": {
-		"Clean": true,
-		"UsePicture": false,
-		"Background": "",
-		"Opacity": 0.25
-	},
-	"DarkMode": false
-};
-var Triggers = [{
-	"Wid": "widget_IN1toOUT1",
-	"Action": "CALL /V1/MEDIA/VIDEO/XP:switch(I1:O1)",
-	"Feedback": "/V1/MEDIA/VIDEO/I1.SignalPresent",
-	"Select": "/V1/MEDIA/VIDEO/XP/O1.ConnectedSource",
-	"Marked": ".* /V1/MEDIA/VIDEO/XP/O1.ConnectedSource=I1"
-}, {
-	"Wid": "widget_IN2toOUT1",
-	"Action": "CALL /V1/MEDIA/VIDEO/XP:switch(I2:O1)",
-	"Feedback": "/V1/MEDIA/VIDEO/I2.SignalPresent",
-	"Select": "/V1/MEDIA/VIDEO/XP/O1.ConnectedSource",
-	"Marked": ".* /V1/MEDIA/VIDEO/XP/O1.ConnectedSource=I2"
-}, {
-	"Wid": "widget_IN3toOUT1",
-	"Action": "CALL /V1/MEDIA/VIDEO/XP:switch(I3:O1)",
-	"Feedback": "/V1/MEDIA/VIDEO/I3.SignalPresent",
-	"Select": "/V1/MEDIA/VIDEO/XP/O1.ConnectedSource",
-	"Marked": ".* /V1/MEDIA/VIDEO/XP/O1.ConnectedSource=I3"
-}, {
-	"Wid": "widget_IN4toOUT1",
-	"Action": "CALL /V1/MEDIA/VIDEO/XP:switch(I4:O1)",
-	"Feedback": "/V1/MEDIA/VIDEO/I4.SignalPresent",
-	"Select": "/V1/MEDIA/VIDEO/XP/O1.ConnectedSource",
-	"Marked": ".* /V1/MEDIA/VIDEO/XP/O1.ConnectedSource=I4"
-}, {
-	"Wid": "widget_IN1toOUT2",
-	"Action": "CALL /V1/MEDIA/VIDEO/XP:switch(I1:O2)",
-	"Feedback": "/V1/MEDIA/VIDEO/I1.SignalPresent",
-	"Select": "/V1/MEDIA/VIDEO/XP/O2.ConnectedSource",
-	"Marked": ".* /V1/MEDIA/VIDEO/XP/O2.ConnectedSource=I1"
-}, {
-	"Wid": "widget_IN2toOUT2",
-	"Action": "CALL /V1/MEDIA/VIDEO/XP:switch(I2:O2)",
-	"Feedback": "/V1/MEDIA/VIDEO/I2.SignalPresent",
-	"Select": "/V1/MEDIA/VIDEO/XP/O2.ConnectedSource",
-	"Marked": ".* /V1/MEDIA/VIDEO/XP/O2.ConnectedSource=I2"
-}, {
-	"Wid": "widget_IN3toOUT2",
-	"Action": "CALL /V1/MEDIA/VIDEO/XP:switch(I3:O2)",
-	"Feedback": "/V1/MEDIA/VIDEO/I3.SignalPresent",
-	"Select": "/V1/MEDIA/VIDEO/XP/O2.ConnectedSource",
-	"Marked": ".* /V1/MEDIA/VIDEO/XP/O2.ConnectedSource=I3"
-}, {
-	"Wid": "widget_IN4toOUT2",
-	"Action": "CALL /V1/MEDIA/VIDEO/XP:switch(I4:O2)",
-	"Feedback": "/V1/MEDIA/VIDEO/I4.SignalPresent",
-	"Select": "/V1/MEDIA/VIDEO/XP/O2.ConnectedSource",
-	"Marked": ".* /V1/MEDIA/VIDEO/XP/O2.ConnectedSource=I4"
-},
-
-{Wid:"v_as_off_o1", Action:"SET /V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy=Off", Select:"/V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy", Marked:".* /V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy=Off"},
-{Wid:"v_as_ld_o1",  Action:"SET /V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy=Last detect", Select:"/V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy", Marked:".* /V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy=Last detect"},
-{Wid:"v_as_fd_o1",  Action:"SET /V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy=First detect", Select:"/V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy", Marked:".* /V1/MEDIA/VIDEO/AUTOSELECT/O1.Policy=First detect"},
-
-{Wid:"v_as_off_o2", Action:"SET /V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy=Off", Select:"/V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy", Marked:".* /V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy=Off"},
-{Wid:"v_as_ld_o2",  Action:"SET /V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy=Last detect", Select:"/V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy", Marked:".* /V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy=Last detect"},
-{Wid:"v_as_fd_o2",  Action:"SET /V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy=First detect", Select:"/V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy", Marked:".* /V1/MEDIA/VIDEO/AUTOSELECT/O2.Policy=First detect"},
-
-
-
-{Wid:"a_as_off_o3", Action:"SET /V1/MEDIA/AUDIO/AUTOSELECT/O3.Policy=Off", Select:"/V1/MEDIA/AUDIO/AUTOSELECT/O3.Policy", Marked:".* /V1/MEDIA/AUDIO/AUTOSELECT/O3.Policy=Off"},
-{Wid:"a_as_fv_o3",  Action:"SET /V1/MEDIA/AUDIO/AUTOSELECT/O3.Policy=Follow video", Select:"/V1/MEDIA/AUDIO/AUTOSELECT/O3.Policy", Marked:".* /V1/MEDIA/AUDIO/AUTOSELECT/O3.Policy=Follow video"},
-
-{Wid:"a_as_fv_o3_o1", Action:"SET /V1/MEDIA/AUDIO/AUTOSELECT/O3.VideoFollowPort=O1", Select:"/V1/MEDIA/AUDIO/AUTOSELECT/O3.VideoFollowPort", Marked:".* /V1/MEDIA/AUDIO/AUTOSELECT/O3.VideoFollowPort=O1"},
-{Wid:"a_as_fv_o3_o2", Action:"SET /V1/MEDIA/AUDIO/AUTOSELECT/O3.VideoFollowPort=O2", Select:"/V1/MEDIA/AUDIO/AUTOSELECT/O3.VideoFollowPort", Marked:".* /V1/MEDIA/AUDIO/AUTOSELECT/O3.VideoFollowPort=O2"},
-
-
-
-{Wid:"u_as_off_h1", Action:"SET /V1/MEDIA/USB/AUTOSELECT/H1.Policy=Off", Select:"/V1/MEDIA/USB/AUTOSELECT/H1.Policy", Marked:".* /V1/MEDIA/USB/AUTOSELECT/H1.Policy=Off"},
-{Wid:"u_as_fv_h1",  Action:"SET /V1/MEDIA/USB/AUTOSELECT/H1.Policy=Follow video", Select:"/V1/MEDIA/USB/AUTOSELECT/H1.Policy", Marked:".* /V1/MEDIA/USB/AUTOSELECT/H1.Policy=Follow video"},
-	  
-{Wid:"u_as_fv_h1_o1", Action:"SET /V1/MEDIA/USB/AUTOSELECT/H1.VideoFollowPort=O1", Select:"/V1/MEDIA/USB/AUTOSELECT/H1.VideoFollowPort", Marked:".* /V1/MEDIA/USB/AUTOSELECT/H1.VideoFollowPort=O1"},
-{Wid:"u_as_fv_h1_o2", Action:"SET /V1/MEDIA/USB/AUTOSELECT/H1.VideoFollowPort=O2", Select:"/V1/MEDIA/USB/AUTOSELECT/H1.VideoFollowPort", Marked:".* /V1/MEDIA/USB/AUTOSELECT/H1.VideoFollowPort=O2"},
-
-
-{Wid:"o3_i1", Action:"CALL /V1/MEDIA/AUDIO/XP:switch(O3:I1)", "Feedback": "/V1/MEDIA/AUDIO/I1.SignalPresent", Select:"/V1/MEDIA/AUDIO/XP/O3.ConnectedSource", Marked:".* /V1/MEDIA/AUDIO/XP/O3.ConnectedSource=I1"},
-{Wid:"o3_i2", Action:"CALL /V1/MEDIA/AUDIO/XP:switch(O3:I2)", "Feedback": "/V1/MEDIA/AUDIO/I2.SignalPresent", Select:"/V1/MEDIA/AUDIO/XP/O3.ConnectedSource", Marked:".* /V1/MEDIA/AUDIO/XP/O3.ConnectedSource=I2"},
-{Wid:"o3_i3", Action:"CALL /V1/MEDIA/AUDIO/XP:switch(O3:I3)", "Feedback": "/V1/MEDIA/AUDIO/I3.SignalPresent", Select:"/V1/MEDIA/AUDIO/XP/O3.ConnectedSource", Marked:".* /V1/MEDIA/AUDIO/XP/O3.ConnectedSource=I3"},
-{Wid:"o3_i4", Action:"CALL /V1/MEDIA/AUDIO/XP:switch(O3:I4)", "Feedback": "/V1/MEDIA/AUDIO/I4.SignalPresent", Select:"/V1/MEDIA/AUDIO/XP/O3.ConnectedSource", Marked:".* /V1/MEDIA/AUDIO/XP/O3.ConnectedSource=I4"},
-
-{Wid:"o3_mute", Action:"SET /V1/MEDIA/AUDIO/O3.Mute=true", Select:"/V1/MEDIA/AUDIO/O3.Mute", Marked:".* /V1/MEDIA/AUDIO/O3.Mute=true"},
-{Wid:"o3_unmute", Action:"SET /V1/MEDIA/AUDIO/O3.Mute=false", Select:"/V1/MEDIA/AUDIO/O3.Mute", Marked:".* /V1/MEDIA/AUDIO/O3.Mute=false"},
-
-/*
-{Wid:"h1_u1", Action:"CALL /V1/MEDIA/USB/XP:switch(U1:H1)", "Feedback": "/V1/MEDIA/USB/U1.Connected", Select:"/V1/MEDIA/USB/XP/H1.ConnectedSource", Marked:".* /V1/MEDIA/USB/XP/H1.ConnectedSource=U1"},
-{Wid:"h1_u2", Action:"CALL /V1/MEDIA/USB/XP:switch(U2:H1)", "Feedback": "/V1/MEDIA/USB/U2.Connected", Select:"/V1/MEDIA/USB/XP/H1.ConnectedSource", Marked:".* /V1/MEDIA/USB/XP/H1.ConnectedSource=U2"},
-{Wid:"h1_u3", Action:"CALL /V1/MEDIA/USB/XP:switch(U3:H1)", "Feedback": "/V1/MEDIA/USB/U3.Connected", Select:"/V1/MEDIA/USB/XP/H1.ConnectedSource", Marked:".* /V1/MEDIA/USB/XP/H1.ConnectedSource=U3"},
-{Wid:"h1_u4", Action:"CALL /V1/MEDIA/USB/XP:switch(U4:H1)", "Feedback": "/V1/MEDIA/USB/U4.Connected", Select:"/V1/MEDIA/USB/XP/H1.ConnectedSource", Marked:".* /V1/MEDIA/USB/XP/H1.ConnectedSource=U4"},
-*/
-
-{Wid:"h1_u1", Action:"CALL /V1/MEDIA/USB/XP:switch(U1:H1)", Select:"/V1/MEDIA/USB/XP/H1.ConnectedSource", Marked:".* /V1/MEDIA/USB/XP/H1.ConnectedSource=U1"},
-{Wid:"h1_u2", Action:"CALL /V1/MEDIA/USB/XP:switch(U2:H1)", Select:"/V1/MEDIA/USB/XP/H1.ConnectedSource", Marked:".* /V1/MEDIA/USB/XP/H1.ConnectedSource=U2"},
-{Wid:"h1_u3", Action:"CALL /V1/MEDIA/USB/XP:switch(U3:H1)", Select:"/V1/MEDIA/USB/XP/H1.ConnectedSource", Marked:".* /V1/MEDIA/USB/XP/H1.ConnectedSource=U3"},
-{Wid:"h1_u4", Action:"CALL /V1/MEDIA/USB/XP:switch(U4:H1)", Select:"/V1/MEDIA/USB/XP/H1.ConnectedSource", Marked:".* /V1/MEDIA/USB/XP/H1.ConnectedSource=U4"},
-
-
-
-{Wid:"cpu_temp", Select:"/V1/MANAGEMENT/HEALTH/MB/TEMPERATURE/CPU.Value", Display:".* /V1/MANAGEMENT/HEALTH/MB/TEMPERATURE/CPU.Value"},
-{Wid:"DC_IN_24V", Select:"/V1/MANAGEMENT/HEALTH/MB/VOLTAGE/DC_IN_24V.Value", Display:".* /V1/MANAGEMENT/HEALTH/MB/VOLTAGE/DC_IN_24V.Value"},
-{Wid:"GENERAL_5V", Select:"/V1/MANAGEMENT/HEALTH/MB/VOLTAGE/GENERAL_5V.Value", Display:".* /V1/MANAGEMENT/HEALTH/MB/VOLTAGE/GENERAL_5V.Value"},
-{Wid:"GENERAL_3V3", Select:"/V1/MANAGEMENT/HEALTH/MB/VOLTAGE/GENERAL_3V3.Value", Display:".* /V1/MANAGEMENT/HEALTH/MB/VOLTAGE/GENERAL_3V3.Value"},
-{Wid:"VIDEO_USB_1V2", Select:"/V1/MANAGEMENT/HEALTH/MB/VOLTAGE/VIDEO_USB_1V2.Value", Display:".* /V1/MANAGEMENT/HEALTH/MB/VOLTAGE/VIDEO_USB_1V2.Value"},
-{Wid:"VIDEO_1V05", Select:"/V1/MANAGEMENT/HEALTH/MB/VOLTAGE/VIDEO_1V05.Value", Display:".* /V1/MANAGEMENT/HEALTH/MB/VOLTAGE/VIDEO_1V05.Value"},
-{Wid:"VIDEO_1V", Select:"/V1/MANAGEMENT/HEALTH/MB/VOLTAGE/VIDEO_1V.Value", Display:".* /V1/MANAGEMENT/HEALTH/MB/VOLTAGE/VIDEO_1V.Value"},
-
-
-{
-	"Wid": "o3_slider",
-	"Action": "SET /V1/MEDIA/AUDIO/O3.VolumePercent=%c[Math.trunc(value)].10",
-	"FeedbackRange": "/V1/MEDIA/AUDIO/O3.VolumePercent=%c[Math.trunc(value)].10"
-},			
-
-
-{Wid:"ManufacturerName", Select:"/.ManufacturerName", Display:".* /.ManufacturerName"},
-{Wid:"ProductName", Select:"/.ProductName", Display:".* /.ProductName"},
-{Wid:"PartNumber", Select:"/.PartNumber", Display:".* /.PartNumber"},
-{Wid:"SerialNumber", Select:"/.SerialNumber", Display:".* /.SerialNumber"},
-{Wid:"PackageVersion", Select:"/.PackageVersion", Display:".* /.PackageVersion"},
-
-
-];
-var Settings = ["SET /V1/MEDIA/VIDEO/O1.Name=HDMI out 1\r\n", "SET /V1/MEDIA/VIDEO/O2.Name=HDMI out 2\r\n", "CALL /V1/MEDIA/VIDEO/XP:setDestinationPortAutoselect(O1:D)\r\n", "CALL /V1/MEDIA/VIDEO/XP:setDestinationPortAutoselect(O2:D)\r\n", "SET /V1/MANAGEMENT/UID.DeviceLabel=Meeting Room\r\n", "SET /V1/MEDIA/VIDEO/I1.Name=USB-C in 1\r\n", "SET /V1/MEDIA/VIDEO/I2.Name=USB-C in 2\r\n", "SET /V1/MEDIA/VIDEO/I3.Name=HDMI in 3\r\n", "SET /V1/MEDIA/VIDEO/I4.Name=HDMI in 4\r\n", "SET /V1/MANAGEMENT/UI/BUTTONS/B0.DefaultFunctionEnable=false\r\n", "SET /V1/MANAGEMENT/UI/BUTTONS/B1.DefaultFunctionEnable=false\r\n", "SET /V1/MANAGEMENT/UI/BUTTONS/B2.DefaultFunctionEnable=false\r\n"];
-
-
-
-var D = {};if((location.host == "") || (location.host == "about:blank")){;}else {var WS = new WebSocket("ws://"+location.host.replace(/:.*/,'')+":6107");}var keepalive;var registering_array = [];var taps={touchstart:0, mousedown:0};var tapscount;var loginstate=false;var LW3Browser = {ID: "LW3Browser",Title: "LW3 Browser",currentnode:"",currentproperty:"",Text: "Select node to enter the node.<br>Or property to chenge the property.",NoClear: true,Type: "Options",Options:['<[ Start ]>','<[ Exit ]>'],callback: function() {if(this.Type=='Input') {if (this.currentproperty != '') {WS.send(`SET ${LW3Browser.currentnode+LW3Browser.currentproperty}=${this.value}\r\n`);}if (this.currentcall != '') {WS.send(`CALL ${LW3Browser.currentnode+LW3Browser.currentcall}(${this.value})\r\n`);}setTimeout(function(){LW3Browser.accept();LW3Browser.Type='Options';LW3Browser.option='<[ Back ]>';LW3Browser.callback();},100);}if(this.Type=='Options') {switch(this.option){case '<[ Quick Break ]>':TerminalLoggerDB = [];TerminalLoggerEnabled = false;LW3Browser.accept();break;case '<[ Exit ]>':TerminalLoggerDB = [];TerminalLoggerEnabled = true;LW3Browser.accept();LW3Browser.Text="Select node to enter the node.<br>Or property to chenge the property.";LW3Browser.currentnode="";LW3Browser.Options=['<[ Start ]>','<[ Exit ]>'];break;case '<[ Start ]>':case '<[ Back ]>':TerminalLoggerDB = [];TerminalLoggerEnabled = true;LW3Browser.accept();LW3Browser.currentnode= LW3Browser.currentnode.replace(/\/\w*$/,'');WS.send(`GETALL ${LW3Browser.currentnode.length==0?'/':LW3Browser.currentnode}\r\n`);setTimeout(function(){LW3Browser.accept();LW3Browser.Options = TerminalLoggerDB.map( t => t.replace(/.* \//,'/').replace(LW3Browser.currentnode,'').replace(/\r/,'').replace(/\n/,'')).concat(['<[ Back ]>','<[ Exit ]>','<[ Quick Break ]>']);LW3Browser.prompt();},100);break;default:TerminalLoggerDB = [];if(this.option.match(/^\/[^.:]/) !== null) {LW3Browser.currentnode += this.option;LW3Browser.Text=LW3Browser.currentnode;WS.send(`GETALL ${LW3Browser.currentnode}\r\n`);} else {if(this.option.match(/^(\/|)\w*\./) !== null) {LW3Browser.currentproperty = this.option.replace(/=(\w*|\W*|\w)*$/,'');LW3Browser.currentcall = '';WS.send(`MAN ${LW3Browser.currentnode+LW3Browser.currentproperty}\r\n`);} else {if(this.option.match(/^(\/|)\w*:/) !== null) {LW3Browser.currentproperty = '';LW3Browser.currentcall = this.option.replace(/=(\w*|\W*|\w)*$/,'');WS.send(`MAN ${LW3Browser.currentnode+LW3Browser.currentproperty}\r\n`);} else {}}setTimeout(function(){LW3Browser.accept();LW3Browser.Text = TerminalLoggerDB.join('');LW3Browser.Type='Input';LW3Browser.value='';LW3Browser.prompt();},100);return;}setTimeout(function(){LW3Browser.accept();LW3Browser.Options = TerminalLoggerDB.map( t => t.replace(/.* \//,'/').replace(LW3Browser.currentnode,'').replace(/\r/,'').replace(/\n/,'')).concat(['<[ Back ]>','<[ Exit ]>','<[ Quick Break ]>']);LW3Browser.prompt();},100);break;}}},shake: function() {var p = gCN('prompt')[0];p.className = p.className.replace(' toggle inactive', '');p.className = p.className += ' toggle inactive';setTimeout(function() {var p = gCN('prompt')[0];p.className = p.className.replace(' toggle inactive', '');}, 500);},accept: function() {this.NoClear = false;this.prompt_clear();}};var PassForMiniWebOnly = {ID: "PassForMiniWebOnly",Title: "Access Control",Text: "Enter the password for the access",Type: "Pin",NoClear: true,callback: function() {if (UserInterface.Password == hashFnv32a(this.value, true)) {loginstate = true;this.NoClear = false;if (loginstate == true) {var p = '';if (registering_array.length > 0) {p += registering_array.pop() + '\r\n';WS.send(p);/*Connecting.prompt();*/}}} else {/*shake*/var p = gCN('prompt')[gCN('prompt').length-1];p.className = p.className.replace(' toggle inactive', '');p.className = p.className += ' toggle inactive';setTimeout(function() {var p = gCN('prompt')[gCN('prompt').length-1];p.className = p.className.replace(' toggle inactive', '');}, 500);}}};var PassForDeviceAndMiniWeb = {ID: "PassForDeviceAndMiniWeb",Title: "Access Control",Text: "Enter the password for the access",NoClear: true,Type: "Pin",callback: function() {WS.send("CALL /LOGIN:login(" + this.value + ")\r\n");WS.send("GET /LOGIN.LoggedIn\r\n");},shake: function() {var p = gCN('prompt')[gCN('prompt').length-1];p.className = p.className.replace(' toggle inactive', '');p.className = p.className += ' toggle inactive';setTimeout(function() {var p = gCN('prompt')[gCN('prompt').length-1];p.className = p.className.replace(' toggle inactive', '');}, 500);},accept: function() {this.NoClear = false;this.prompt_clear();}};var Connecting = {ID: "connecting",Title: "Connecting to " + UserInterface.RoomName,Text: "Gathering information from the device",Type: "Options",Options: []};var Reconnect = {ID: "reconnect",Title: UserInterface.RoomName,Text: "Take control with connecting to the system<br><br>Connect will be refused when there are two active connection used.<br>This case please close the not wanted control interfaces.",Type: "Options",Options: ['Connect'],callback: function() {location.reload();}};var QrEnded = {ID: "qrended",Title: UserInterface.RoomName,Text: "QR code session ended.<br>Take control with reconnecting to the system",Type: "Options",Options: ['Reconnect'],callback: function() {location.reload();}};var DevTools = {ID: "DevTools",Title: "Developer Tools",Text: "Select from tools",Type: "Options",Options: ['Terminal Console (open/close)', 'LW3 Browser','Exit'],callback: function(){switch(this.option) {case 'Terminal Console (open/close)':var l = gID('logger');switch(l.style.visibility) {case 'visible': l.style.visibility = 'hidden'; break;default: l.style.visibility = 'visible'; break;}break;case 'LW3 Browser':LW3Browser.prompt();break;break;default: break;}}};function QRSessionExpandTo5s() {const minutes = 5;const msecs = minutes * 60 * 1000;if (location.href.match(/viaqrscan/) !== null) {clearTimeout(disconnectTimeout);disconnectTimeout = setTimeout(function() {disconnectTimeoutState = true;if (typeof(WS)!=='undefined') {WS.close();}}, msecs);}}function isQRSessionTimedOut() {if ((location.href.match(/viaqrscan/) !== null) && (disconnectTimeoutState == true)) {return true;} else {return false;}}var TerminalLoggerDB = [];var TerminalLoggerEnabled = false;function TerminalLogger(data, color=null) {if (TerminalLoggerEnabled == true) {TerminalLoggerDB.push(data);}var l = gID('logger');var style = '';var consolecolor = '';if (color != null) {style = 'style="color:' + color + ';"';consolecolor = 'color:' + color;console.log('%c' + data, consolecolor);} else {console.log(data);}l.innerHTML += '<p ' + style + '>' + DateTime.toISOString() + data + '</p>';while (l.childElementCount > 7) {l.removeChild(l.firstChild);}}function connect() {function tapper(event){if (event.target.id == 'device') {clearTimeout(tapscount);taps[event.type]++;tapscount = setTimeout(function(){switch(taps[event.type]) {case 3:var o = (UserInterface.Background.Background.match('data:image') != null) ? ['Original','Clean','Picture'] : ['Original','Clean'];({ID: "backgroundclear", Title: "Background Settings", Text: "Select from background options", Type: "Options", Options: o, callback:function(){switch(this.option) {case 'Original':UserInterface.Background.Clean=false;UserInterface.Background.UsePicture=false;break;case 'Clean':UserInterface.Background.Clean=true;UserInterface.Background.UsePicture=false;break;case 'Picture':UserInterface.Background.Clean=false;UserInterface.Background.UsePicture=true;break;}onLoad();}}).prompt();break;case 5:DevTools.prompt();break;}taps[event.type]=0;},500);}};document.body.ontouchstart = tapper;document.body.onmousedown = tapper;QRSessionExpandTo5s();if((location.host == "") || (location.host == "about:blank")) {generateUI();}else {if (UserInterface.PasswordRequired == 'No' ) {loginstate=true;}else {loginstate=false;}WS = new WebSocket("ws://"+location.host.replace(/:.*/,'')+":6107");WS.onopen = function(event) {disconnectTimeoutState = false; keepalive = setInterval(function(){WS.send('')},5000);if (WS.readyState == 1) {QRSessionExpandTo5s();/*document.body.style.background = "white";*/generateUI();WS.onmessage = function(msg)  {WS.Received += msg.data;while (WS.Received.indexOf(String.fromCharCode(10)) > 0) {var m = WS.Received.substr(0,WS.Received.indexOf(String.fromCharCode(10)));if (m.match('/LOGIN.*Not exists') != null) {if(UserInterface.PasswordRequired == 'MiniWebOnly') {PassForMiniWebOnly.prompt();}if(UserInterface.PasswordRequired == 'No') {loginstate=true;}}if (m.indexOf('/LOGIN.LoginEnable=false') >= 0) {if(UserInterface.PasswordRequired == 'MiniWebOnly') {PassForMiniWebOnly.prompt();}if(UserInterface.PasswordRequired == 'No') {loginstate=true;}}if (m.indexOf('/LOGIN.LoginEnable=true') >= 0) {PassForDeviceAndMiniWeb.prompt();}if (m.match('/LOGIN.*Access denied') !== null) {PassForDeviceAndMiniWeb.shake();}if (m.indexOf('/LOGIN.LoggedIn=false') >= 0) {loginstate=false;}if (m.indexOf('/LOGIN.LoggedIn=true') >= 0) {loginstate=true;PassForDeviceAndMiniWeb.accept();}for (var t=0; t<Object.keys(Triggers).length; t++) {if ((typeof(Triggers[t].FeedbackRange) !== 'undefined') && (Triggers[t].FeedbackRange !== "")) {if (m.indexOf(Triggers[t].FeedbackRange.replace(/=.*/,"=")) >= 0) {if(gID(Triggers[t].Wid) !== null) {var corrector = Triggers[t].FeedbackRange.replace(/.*=/,"");/*var value = parseInt(m.split('=')[1]);*/var value = m.split('=')[1];console.log('value_b',value);if (!isNaN(value)) {value = parseInt(m.split('=')[1]);}console.log('value_a',value);var c_ = '';var callobj = 'Action';var c16 = corrector.match(/%c\[(.*)\]\.16/);if ((c16!==null) && (typeof(c16[1])!=='undefined')) { c_ = eval(c16[1]).toString(16); }var c10 = corrector.match(/%c\[(.*)\]\.10/);if ((c10!==null) && (typeof(c10[1])!=='undefined')) { c_ = eval(c10[1]).toString(10); }if (Triggers[t].FeedbackRange.indexOf('=') >0) {console.log('c_',c_);gID(Triggers[t].Wid).value = c_;} else {gID(Triggers[t].Wid).value = value;}}}}if ((typeof(Triggers[t].Feedback) !== 'undefined') && (Triggers[t].Feedback !== "")) {if (m.indexOf(Triggers[t].Feedback) >= 0) {if(gID(Triggers[t].Wid) !== null) {gID(Triggers[t].Wid).className = gID(Triggers[t].Wid).className.replace(' active','').replace(' inactive','');if (isNaN(m.split('=')[1]) == false) {gID(Triggers[t].Wid).className += (parseInt(m.split('=')[1]) == 0) ? ' inactive' : ' active';} else {gID(Triggers[t].Wid).className += (m.split('=')[1].replace('\n','').replace('\r','') == 'false') ? ' inactive' : ' active';}}}}if ((typeof(Triggers[t].Select) !== 'undefined') && (Triggers[t].Select !== "")) {if (m.indexOf(Triggers[t].Select) >= 0) {if(gID(Triggers[t].Wid) !== null) {gID(Triggers[t].Wid).className = gID(Triggers[t].Wid).className.replace(' selected', '');if ((typeof (Triggers[t].Marked) !== 'undefined') && (Triggers[t].Marked !== "")) {gID(Triggers[t].Wid).className += (parseInt(m.search(new RegExp(Triggers[t].Marked,'gm'))) == 0) ? ' selected' : '';}if ((typeof (Triggers[t].Display) !== 'undefined') && (Triggers[t].Display !== "")) {gID(Triggers[t].Wid).innerHTML = m.split('=')[1].replace('\n', '').replace('\r', '');}}}}}WS.Received = WS.Received.substr(WS.Received.indexOf(String.fromCharCode(10))+1);TerminalLogger('  ->  '+m,'#aaa');/*send commands from stock when message arrived*/if (loginstate == true) {var p = '';if (registering_array.length > 0) {p += registering_array.pop()+'\r\n';WS.send(p);if (registering_array.length <= 0) {Connecting.prompt_clear();}}}}};WS.Received = "";registering_array = [];Connecting.prompt();for (var t=0; t<Object.keys(Triggers).length; t++) {if ((typeof(Triggers[t].Feedback) !== 'undefined') && (Triggers[t].Feedback !== "")) {registering_array.push("GET "+Triggers[t].Feedback+'\r\n');}}for (var t=0; t<Object.keys(Triggers).length; t++) {if ((typeof(Triggers[t].Feedback) !== 'undefined') && (Triggers[t].Feedback !== "")) {registering_array.push("OPEN "+Triggers[t].Feedback.replace(/\..*/,'')+'\r\n');}}for (var t=0; t<Object.keys(Triggers).length; t++) {if ((typeof(Triggers[t].FeedbackRange) !== 'undefined') && (Triggers[t].FeedbackRange !== "")) {registering_array.push("GET "+Triggers[t].FeedbackRange.replace(/=.*/,"")+'\r\n');}}for (var t=0; t<Object.keys(Triggers).length; t++) {if ((typeof(Triggers[t].FeedbackRange) !== 'undefined') && (Triggers[t].FeedbackRange !== "")) {registering_array.push("OPEN "+Triggers[t].FeedbackRange.replace(/\..*/,'')+'\r\n');}}for (var t=0; t<Object.keys(Triggers).length; t++) {if ((typeof(Triggers[t].Select) !== 'undefined') && (Triggers[t].Select !== "")) {registering_array.push("GET "+Triggers[t].Select+'\r\n');}}for (var t=0; t<Object.keys(Triggers).length; t++) {if ((typeof(Triggers[t].Select) !== 'undefined') && (Triggers[t].Select !== "")) {registering_array.push("OPEN "+Triggers[t].Select.replace(/\..*/,'')+'\r\n');}}for (var s=0; s<Object.keys(Settings).length; s++) {if(Settings[s].indexOf('@wait') >= 0) {} else {registering_array.push(Settings[s]+'\r\n');}}var p = '';WS.send('GET /LOGIN.LoginEnable\r\nGET /LOGIN.LoggedIn\r\n');if (UserInterface.PasswordRequired == 'No' ) {loginstate=true;}else {loginstate=false;}}};WS.onclose = function(event) {clearTimeout(keepalive);console.log('Connection closed');if (isQRSessionTimedOut()) { QrEnded.prompt(); }else { Reconnect.prompt(); }clearTimeout(refreshTimeout);};WS.onerror = function(event) {clearTimeout(keepalive);console.log('Connection error');if (isQRSessionTimedOut()) { QrEnded.prompt(); }else { Reconnect.prompt(); }clearTimeout(refreshTimeout);};}}document.onvisibilitychange = function() {if (document.visibilityState !== 'visible') {clearTimeout(keepalive);WS.onclose = function(){console.log('document.visibilityState',document.visibilityState);};if (typeof(WS)!=='undefined') {WS.close();}} else {location.reload();}};window.onclose = function() {if (typeof(WS)!=='undefined') {WS.close();}};window.onbeforeunload = function() {if (typeof(WS)!=='undefined') {WS.close();}};var disconnectTimeout;var disconnectTimeoutState = false;function Act(element, callobj='Action') {QRSessionExpandTo5s();var cn = document.getElementsByName(element.id);for (var c = 0; c < cn.length; c++) {cn[c].className = cn[c].className.replace(' toggle','');cn[c].className += ' toggle';cn[c].rt = function(e) {setTimeout( function() {e.className = e.className.replace(' toggle','');},500);};cn[c].rt(cn[c]);}var cn = document.getElementsByName(element.getAttribute('panelid'));for (var c = 0; c < cn.length; c++) {cn[c].className = cn[c].className.replace(' toggle','');cn[c].className += ' toggle';cn[c].rt = function(e) {setTimeout( function() {e.className = e.className.replace(' toggle','');},500);};cn[c].rt(cn[c]);}for (var t=0; t<Object.keys(Triggers).length; t++) {var Pid = element.getAttribute('panelid');if (typeof(Triggers[t].Pid) !== 'undefined') {if (Pid !== null) {if (Pid == Triggers[t].Pid) {if (typeof(Triggers[t][callobj])!=='undefined'){if (typeof(Triggers[t][callobj])=='object'){Triggers[t][callobj].prompt();} else {var value = element.value;var c_ = '';var c16 = Triggers[t][callobj].match(/%c\[(.*)\]\.16/);if ((c16!==null) && (typeof(c16[1])!=='undefined')) { c_ = eval(c16[1]).toString(16); }var c10 = Triggers[t][callobj].match(/%c\[(.*)\]\.10/);if ((c10!==null) && (typeof(c10[1])!=='undefined')) { c_ = eval(c10[1]).toString(10); }const post = Triggers[t][callobj].replace(/%.10/gm, parseInt(element.value).toString(10)).replace(/%.16/gm, parseInt(element.value).toString(16).padStart(2,'0')).replace(/%c\[(.*)\]\.16/gm, c_).replace(/%c\[(.*)\]\.10/gm, c_);try {WS.send(post+'\r\n');} catch(err) {}TerminalLogger('  <-  '+post, '#2e3848');}}}}}if (typeof(Triggers[t].Wid) !== 'undefined') {if (element.id == Triggers[t].Wid) {if (document.getElementById(element.id).className.indexOf('inactive') < 0) {if (typeof(Triggers[t][callobj])!=='undefined'){if (typeof(Triggers[t][callobj])=='object'){Triggers[t][callobj].prompt();} else {var value = element.value;var c_ = '';var c16 = Triggers[t][callobj].match(/%c\[(.*)\]\.16/);if ((c16!==null) && (typeof(c16[1])!=='undefined')) { c_ = eval(c16[1]).toString(16); }var c10 = Triggers[t][callobj].match(/%c\[(.*)\]\.10/);if ((c10!==null) && (typeof(c10[1])!=='undefined')) { c_ = eval(c10[1]).toString(10); }const post = Triggers[t][callobj].replace(/%.10/gm, parseInt(element.value).toString(10)).replace(/%.16/gm, parseInt(element.value).toString(16).padStart(2,'0')).replace(/%c\[(.*)\]\.16/gm, c_).replace(/%c\[(.*)\]\.10/gm, c_);try {WS.send(post+'\r\n');} catch(err) {}TerminalLogger('  <-  '+post, '#2e3848');}}}}}}/*var wid = gID(element.id);*//*var wop = wid.parentElement.parentElement.parentElement.getElementsByClassName('widget');*/}function gID(e) { return(document.getElementById(e)); }function gCN(c) { return(document.getElementsByClassName(c)); }var DateTime = new Date();function generateUI() {D.d = gID('device');D.d.innerHTML = '';onLoad();D.d.className = 'device';D.d.onclick = function(event) {if (event.target.id == 'device') {var _p = gCN('panel');for (var pip = 0; pip < _p.length; pip++) {_p[pip].className += " noscreen";}D.d.className = D.d.className.replace(/ device_panelopen/gm,'');D.PIC.d.className = D.PIC.d.className.replace(/ noscreen/gm,'');D.PIC.d.className = "paneliconcontainer";}QRSessionExpandTo5s();};D.PIC = {d:document.createElement('DIV')};D.PIC.d.className = 'paneliconcontainer';D.PIC.d.id = 'paneliconcontainer';D.d.appendChild(D.PIC.d);if((location.host == "") || (location.host == "about:blank")) {var demoviewlabel = document.createElement('DIV');demoviewlabel.style="position: absolute;top: 1em;font-size: 5vmin; margin:auto";demoviewlabel.innerHTML = 'Preview Mode<br><small style="font-size:2vmin">Upload the MiniWeb to the Lightware unit to control the room</small>';D.d.appendChild(demoviewlabel);}if(typeof(UserInterface.Logo)!=='undefined') {if(UserInterface.Logo.match('data:image') != null) {var logo = document.createElement('IMG');logo.style="position: absolute;bottom: 1em;font-size: 3vmin;margin: auto; max-width:20vmin; max-height:10vmin; filter: opacity(0.7);";logo.src = UserInterface.Logo;D.d.appendChild(logo);}}var roomname = document.createElement('DIV');roomname.style="position: absolute;bottom: 1em;font-size: 3vmin;left: 1em; color:#fff";roomname.innerHTML = UserInterface.RoomName;document.title = UserInterface.RoomName;if(typeof(UserInterface.QRWifiDB) !== 'undefined') {var qrwifi = document.createElementNS('http://www.w3.org/2000/svg', 'svg');qrwifi.style="position: absolute;top: 1em;font-size: 3vmin;left: 1em; width: 15vmin; height: 15vmin;";qrwifi.width = '15vmin';qrwifi.height = '15vmin';var db = UserInterface.QRWifiDB.split(',');var qrstr = '<g id="qrwifiOne" width="15vmin" height="15vmin"><svg viewBox="0 0 '+UserInterface.QRWifiDBbaseval+' '+UserInterface.QRWifiDBbaseval+'" width="100%" height="100%" fill="#ffffff00" xmlns:xlink="http://www.w3.org/1999/xlink"><rect fill="#ffffff00" width="100%" height="100%"></rect><rect fill="#808285" width="1" height="1" id="t1"></rect>';for (var q=0; q<db.length; q+=2) {qrstr +='<use x="'+db[q]+'" y="'+db[q+1]+'" href="#t1"></use>';}qrwifi.innerHTML = qrstr+'</svg></g>';D.d.appendChild(qrwifi);var qrwifilabel = document.createElement('DIV');qrwifilabel.style="position: absolute;top: calc(1em + 0.5em + 15vmin); font-size: 2.5vmin;left: 1.25em; width: 15vmin; height: 1em; color: #808285";qrwifilabel.innerHTML = 'WiFi';D.d.appendChild(qrwifilabel);}if(typeof(UserInterface.QRControlDB) !== 'undefined') {var qrminiweb = document.createElementNS('http://www.w3.org/2000/svg', 'svg');qrminiweb.style="position: absolute;top: 1em;font-size: 3vmin;right: 1em; width: 15vmin; height: 15vmin;";qrminiweb.width = '15vmin';qrminiweb.height = '15vmin';var db = UserInterface.QRControlDB.split(',');var qrstr = '<g id="qrminiwebOne" width="15vmin" height="15vmin"><svg viewBox="0 0 '+UserInterface.QRControlDBbaseval+' '+UserInterface.QRControlDBbaseval+'" width="100%" height="100%" fill="#ffffff00" xmlns:xlink="http://www.w3.org/1999/xlink"><rect fill="#ffffff00" width="100%" height="100%"></rect><rect fill="#808285" width="1" height="1" id="t2"></rect>';for (var q=0; q<db.length; q+=2) {qrstr +='<use x="'+db[q]+'" y="'+db[q+1]+'" href="#t2"></use>';}qrminiweb.innerHTML = qrstr+'</svg></g>';D.d.appendChild(qrminiweb);var qrminiweblabel = document.createElement('DIV');qrminiweblabel.style="position: absolute;top: calc(1em + 0.5em + 15vmin);font-size: 2.5vmin; right: 1.25em; width: 15vmin; height: 1em; color: #808285";qrminiweblabel.innerHTML = 'Control';D.d.appendChild(qrminiweblabel);}D.d.appendChild(roomname);var datetime = document.createElement('DIV');datetime.style="position: absolute;bottom: 1em;font-size: 3vmin;right: 1em; color:#fff";datetime.id="datetime";datetime.innerHTML = DateTime.toLocaleString();D.d.appendChild(datetime);setInterval(function(){DateTime = new Date(); gID('datetime').innerHTML = DateTime.toLocaleString();},1000);D.PI = [];D.P = [];D.Pt = [];/*for(var panel=0; panel < Object.keys(UserInterface.Panels).length; panel++) {*/for (const [key_p, p] of Object.entries(UserInterface.Panels)) {/* Panels Icons */var a = document.createElement('DIV');a.innerText = unescape(p.Name);a.className = 'panelicon';a.id = 'panel'+key_p+'icon';a.setAttribute('panelid',p.PanelId);a.setAttribute('name',p.PanelId);a.style.background = p.Color;a.onclick = function(event) {if (gID(this.id.replace('icon','page0')) !== null) {D.PIC.d.className = "paneliconcontainer_noscreen";D.d.className += ' device_panelopen';var _p = gCN('panel');for (var pip = 0; pip < _p.length; pip++) {_p[pip].className += " noscreen";}gID(this.id.replace('icon','')).className = gID(this.id.replace('icon','')).className.replace(/ noscreen/gm,'');}Act(this,'Action');};a.ontouchstart = function(event) {Act(this,'Press');};a.ontouchend = function(event) {Act(this,'Release');};a.onmousedown = function(event) {Act(this,'Press');};a.onmouseup = function(event) {Act(this,'Release');};/* Panels */if(typeof(p.Pages) !== 'undefined') {var b = document.createElement('DIV');b.className = 'panel noscreen';b.id = 'panel'+key_p;/* Panel Tab container */D.Pt.push( {d:document.createElement('DIV')} );D.Pt[key_p].d.className = 'paneltab';D.PIC.d.appendChild(a);b.appendChild(D.Pt[key_p].d);for (const [key_pg, pg] of Object.entries(p.Pages)) {/* Pages */var c = document.createElement('DIV');c.className = 'page noscreen';c.id = 'panel'+key_p+'page'+key_pg;/* Page Tabs */var d = document.createElement('DIV');d.innerText = unescape(pg.Name);d.className = 'pagetab';d.id = 'panel'+key_p+'page'+key_pg+'tab';d.onclick = function(event) {var _p = this.parentElement.parentElement.getElementsByClassName('page');for (var pip = 0; pip < _p.length; pip++) {_p[pip].className += " noscreen";}gID(this.id.replace('tab','')).className = gID(this.id.replace('tab','')).className.replace(/ noscreen/gm,'');var _t = this.parentElement.getElementsByClassName('pagetab');for (var tab = 0; tab < _t.length; tab++) {_t[tab].className = 'pagetab';}this.className += " pagetab_selected";};for (const [key_r, r] of Object.entries(pg.Rows)) {var e = document.createElement('DIV');e.innerText = unescape(r.Name);e.className = 'rowlabel';var f = document.createElement('DIV');f.className = 'rowwidgetcontainer';/* Rows */var g = document.createElement('DIV');g.className = 'row';if (pg.Options.indexOf('hideRowNames=1') >= 0) {g.className = 'row';e.className = 'rowlabel_hiderow';f.className = 'rowwidgetcontainer_hiderow';b.className = 'panel panel_hiderow noscreen';}g.appendChild(e);g.appendChild(f);/* Widgets */for (const [key_w, w] of Object.entries(r.Widgets)) {var e = document.createElement('DIV');e.className = 'widget';e.id = w.WidgetId;e.setAttribute('name',w.WidgetId);if (w.Type == 'Navigator') {var hh = ["up","right","left","down","center"];for(var _h=0; _h < hh.length;_h++) {var h = document.createElement('DIV');h.className = 'widget';h.className += '_'+w.Type+'_ring_'+hh[_h];h.id = w.WidgetId+'_'+hh[_h];h.setAttribute('name',w.WidgetId+'_'+hh[_h]);h.ontouchstart = function(event) {Act(this,'Press');};h.ontouchend = function(event) {Act(this,'Release');};h.onmousedown = function(event) {Act(this,'Press');};h.onmouseup = function(event) {Act(this,'Release');};h.onclick = function(event) {Act(this,'Action');};e.appendChild(h);var i = document.createElement('DIV');i.className = 'arrow';i.className += '_'+hh[_h];i.id = w.WidgetId+'_'+hh[_h];i.setAttribute('name',w.WidgetId+'_'+hh[_h]);h.appendChild(i);}e.className += '_'+w.Type;} else {e.innerText = unescape(w.Name);switch (w.Type) {case "Icon": case "IconGap": e.className += '_'+w.Type;break;case "Slider":e.className = 'widget_Slider_container';e.innerText='';var h = document.createElement('INPUT');h.className = 'widget';h.className += '_'+w.Type;h.id = w.WidgetId;h.setAttribute('name',w.WidgetId);h.setAttribute('type','range');h.setAttribute('min',0);h.setAttribute('max',100);h.oninput = function(event) {Act(this,'Action');};e.appendChild(h);e.id = w.WidgetId+'_div';break;default: if (w.Name == '') {e.className += ' hidden';}e.className += ' '+w.Type;e.innerHTML = '<div>'+unescape(w.Name)+'<br><small></small></div>';var st = "";if ((typeof(w.Options)!=='undefined')&&(w.Options.indexOf('size') >= 0)) {st+= 'width:'+w.Options[ w.Options.indexOf('size') +5] + 'em';e.setAttribute('style',st);}break;}e.ontouchstart = function(event) {Act(this,'Press');};e.ontouchend = function(event) {Act(this,'Release');};e.onmousedown = function(event) {Act(this,'Press');};e.onmouseup = function(event) {Act(this,'Release');};e.onclick = function(event) {Act(this,'Action');};}f.appendChild(e);}c.appendChild(g);}D.Pt[key_p].d.appendChild(d);b.appendChild(c);}D.d.appendChild(b);if ((typeof(b.firstChild.firstChild) !== 'undefined') && (b.firstChild.firstChild !== null)){b.firstChild.firstChild.className = 'pagetab pagetab_selected';document.getElementById(b.firstChild.firstChild.id.replace('tab','')).className = document.getElementById(b.firstChild.firstChild.id.replace('tab','')).className.replace(/ noscreen/gm,'');}}}window.scrollTo(0,1);}Object.prototype.prompt = function() {var obj = this;if (typeof(obj)==='object') {switch(obj.Type) {case 'Options':var d = gID('device');var db = document.createElement('DIV');Object.assign(db, {className : 'device',style : 'background:#0000003f;',id : obj.ID+'outer',position : null,option : null,p : this});var pr = document.createElement('DIV');pr.className = 'prompt';var pr_title = document.createElement('DIV');Object.assign(pr_title, {className : 'prompt_title',innerHTML : obj.Title});pr.appendChild(pr_title);var pr_text = document.createElement('DIV');Object.assign(pr_text, {className : 'prompt_text',innerHTML : obj.Text});pr.appendChild(pr_text);var pr_option = [];for (var o=0; o<Object.keys(obj.Options).length; o++) {pr_option[o] = document.createElement('DIV');Object.assign(pr_option[o], {className : 'prompt_option',innerHTML : obj.Options[o],NoClear : obj.NoClear,id : obj.ID+o,position : o,option : obj.Options[o],prompt : obj,p : copy(this),onclick : function() {this.p.prompt_response(); this.p.prompt_clear();}});Object.assign(pr_option[o].p, {NoClear : copy(this.NoClear),position : copy(o),option : copy(this.Options[o]),});pr.appendChild(pr_option[o]);}db.appendChild(pr);d.appendChild(db);break;case 'Pin':var d = gID('device');var db = document.createElement('DIV');Object.assign(db, {className : 'device',style : 'background:#0000003f;',NoClear : obj.NoClear,id : obj.ID+'outer',position : null,option : null,p : this});var pr = document.createElement('DIV');pr.className = 'prompt';var pr_title = document.createElement('DIV');Object.assign(pr_title, {className : 'prompt_title',innerHTML : obj.Title});pr.appendChild(pr_title);var pr_text = document.createElement('DIV');Object.assign(pr_text, {className : 'prompt_text',innerHTML : obj.Text});pr.appendChild(pr_text);var pr_pin = document.createElement('INPUT');Object.assign(pr_pin, {className : 'prompt_pin',NoClear : obj.NoClear,type : 'password',id : obj.ID,prompt : obj,p : copy(this),onkeyup : function() {event.preventDefault();if (event.keyCode === 13) {this.p.value = copy(this.value);this.value='';this.p.prompt_response(); this.p.prompt_clear();}}});pr.appendChild(pr_pin);db.appendChild(pr);d.appendChild(db);break;case 'Input':var d = gID('device');var db = document.createElement('DIV');Object.assign(db, {className : 'device',style : 'background:#0000003f;',NoClear : obj.NoClear,id : obj.ID+'outer',position : null,option : null,p : this});var pr = document.createElement('DIV');pr.className = 'prompt';var pr_title = document.createElement('DIV');Object.assign(pr_title, {className : 'prompt_title',innerHTML : obj.Title});pr.appendChild(pr_title);var pr_text = document.createElement('DIV');Object.assign(pr_text, {className : 'prompt_text',innerHTML : obj.Text});pr.appendChild(pr_text);var pr_input = document.createElement('INPUT');Object.assign(pr_input, {className : 'prompt_input',NoClear : obj.NoClear,id : obj.ID,prompt : obj,p : copy(this),onkeyup : function() {event.preventDefault();if (event.keyCode === 13) {this.p.value = copy(this.value);this.value='';this.p.prompt_response(); this.p.prompt_clear();}}});pr.appendChild(pr_input);db.appendChild(pr);d.appendChild(db);break;default:break;}}};Object.prototype.prompt_clear = function() {var obj = this;if (typeof(obj)==='object') {if ((typeof(obj.NoClear) !== 'undefined') && (obj.NoClear)) {}else {var d = gID('device');var p = gID(this.ID+'outer');if (p !==null) {d.removeChild(p);}}}};Object.prototype.prompt_response = function() {var obj = this;if(typeof(obj.callback)!=='function') {console.log('There is no callback defined for prompt response: '+obj.id);} else {obj.callback();}};function hashFnv32a(str, asString, seed) {    var i, l,        hval = (seed === undefined) ? 0x811c9dc5 : seed;    for (i = 0, l = str.length; i < l; i++) {        hval ^= str.charCodeAt(i);        hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24);    }    if( asString ){        return ("0000000" + (hval >>> 0).toString(16)).substr(-8);    }    return hval >>> 0;}/* example for prompt:({ID: "connecting", Title: "Connecting to "+UserInterface.RoomName, Text: "...", Type: "Options", Options: ['yes','no'], callback:function(){alert(`undefined , undefined , undefined`)}}).prompt();({ID: "pincode", Title: "Pin", Text: "enter pin", Type: "Pin", callback:function(){alert(JSON.stringify(this))}}).prompt();({ID: "backgroundclear", Title: "Background Settings", Text: "Select from background options", Type: "Options", Options: ['Original','Clean'], callback:function(){switch(this.option) {case 'Original': UserInterface.Background.Clean=false; break; case 'Clean': UserInterface.Background.Clean=true; break;}onLoad();}}).prompt();*/ObjecttoArray = function(obj) {if (Array.isArray(obj) == false) {var arr = new Array();for(var k in Object.keys(obj)) {arr.push(obj[k]);}return arr;} else {return obj;}};function copy(obj) {if (obj === null) {return;}if (obj === 'undefined') {return;}if (typeof(obj) === 'undefined') {return;}  function F() {}  var newObj;  if(typeof(obj.clone) === 'function')    return obj.clone();  if((typeof(obj) !== 'object') && (typeof(obj) !== 'function') || (obj == null))    return obj;  if(typeof(obj) === 'object') {        newObj = {};    var proto = Object.getPrototypeOf(obj);    Object.setPrototypeOf(newObj, proto);  } else {    var aux;    newObj = eval('aux='+obj.toString());    newObj.prototype = obj.prototype;  }  for(var i in obj) {    if(obj.hasOwnProperty(i)) {      if(typeof(obj[i]) !== 'object')        newObj[i] = obj[i];      else        newObj[i] = copy(obj[i]);    }  }  return newObj;}function clone(x) {  if (x === null || x === undefined){return x;}  if (typeof(x.clone) === "function"){return x.clone();}  if (x.constructor == Array) {    var r = [];    for (var i=0,n=x.length; i<n; i++){r.push(clone(x[i]));}    return r;  }  return x;}</script></HEAD><BODY onload="connect()"><DIV id="bg"></div><DIV id="device"></div><DIV id="logger" class="logger"></div></BODY></HTML>
+<HTML>
+	<Title>Lightware MiniWeb</Title>
+	<HEAD>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="apple-mobile-web-app-title" content="MiniWeb" />
+		<meta name="apple-mobile-web-app-capable" content="yes" /><meta name="mobile-web-app-capable" content="yes" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui, minimum-scale = 1, maximum-scale = 1, user-scalable = no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<style>
+			.logger {
+				height: 15vmin;
+				width: 80vw;
+				color: #000a;
+				position: absolute;
+				bottom: 0px;
+				margin: auto;
+				border: 0.1em #2e3848 solid;
+				border-bottom: 0;
+				border-radius: 1em 1em 0 0;
+				left: 10vw;
+				box-shadow: 0.1em 0.2em 1em -0.2em #0005;
+				visibility: hidden;
+				background: linear-gradient(175deg, #f3f4f4 0%, #e6e7e8 100%);
+				padding: 0.5em;
+				overflow: hidden;
+				}
+			.logger p {
+				margin: 0.2em;
+				font-size: 1.5vmin;
+				color: #2e3848;
+				}
+			/* Navigator arrows */
+			.arrow_up, .arrow_down, .arrow_left, .arrow_right {
+				width: 0; 
+				height: 0; 
+				border: 1em solid transparent;
+				margin: 0.06125em;
+				position:relative;
+			}
+			.arrow_up {
+				border-bottom: 1em solid rgba(255,255,255,0.25);
+				transform: rotate(-45deg) translateX(-1em) translateY(0.5em);
+			}
+			.arrow_down {
+				border-top: 1em solid rgba(255,255,255,0.25);
+				transform: rotate(-45deg) translateX(-1em) translateY(1.5em);
+			}
+			.arrow_right {
+				border-left: 1em solid rgba(255,255,255,0.25);
+				transform: rotate(-45deg) translateX(-0.5em) translateY(1em);
+			}
+			.arrow_left {
+				border-right:1em solid rgba(255,255,255,0.25); 
+				transform: rotate(-45deg) translateX(-1.5em) translateY(1em);
+			}
+			/* Navigator */
+			.widget_Navigator{
+				cursor: pointer;
+				position: relative;
+				width: 10em;
+				height: 10em;
+				transform: rotate(45deg);
+				margin: 0.5em;
+			}
+			.widget_Navigator_ring, .widget_Navigator_ring_up, .widget_Navigator_ring_down, .widget_Navigator_ring_left, .widget_Navigator_ring_right, .widget_Navigator_ring_center {
+				position: absolute;
+				width: 50%;
+				height: 50%;
+			}
+			.widget_Navigator_ring_up, .widget_Navigator_ring_down, .widget_Navigator_ring_left, .widget_Navigator_ring_right {
+				margin: -0.06125em;
+			}
+			.widget_Navigator_ring_up{
+				top: 0;
+				left: 0;
+				border-radius: 100% 10% 0% 10%;
+				background: linear-gradient(315deg, #1c2834 33%, #1c2834cc 100%);
+			}
+			.widget_Navigator_ring_right{
+				top: 0;
+				right: 0;
+				border-radius: 10% 100% 10% 0%;
+				background: linear-gradient(45deg, #1c2834 33%, #1c2834cc 100%);
+			}
+			.widget_Navigator_ring_left{
+				bottom: 0;
+				left: 0;
+				border-radius: 10% 0% 10% 100%;
+				background: linear-gradient(225deg, #1c2834 33%, #1c2834cc 100%);
+			}
+			.widget_Navigator_ring_down{
+				bottom: 0;
+				right: 0;
+				border-radius: 0% 10% 100% 10%;
+				background: linear-gradient(135deg, #1c2834 33%, #1c2834cc 100%);
+			}
+			.widget_Navigator_ring_center{
+				top: 25%;
+				left: 25%;
+				border-radius: 50%;
+				background: radial-gradient(#fff 0%, #1c2834 100%);
+			}
+			/* Slider */
+			.widget_Slider {
+				-webkit-appearance: none;
+				width: 100%;
+				height: 2vmin;
+				border-radius: 1em;
+				background: #a7a9ac;
+				outline: none;
+			}
+			.widget_Slider::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				appearance: none;
+				width: 6vmin;
+				height: 6vmin;
+				border-radius: 50%; 
+				background: #2e3848;
+				cursor: pointer;
+				box-shadow: 0.1em 0.2em 1em -0.2em #a7a9ac, inset 1em 1em 2em 0.1em #00000030, inset -1em -1em 3em 0.1em #ffffff30;
+			}
+			.widget_Slider::-moz-range-thumb {
+				width: 6vmin;
+				height: 6vmin;
+				border-radius: 50%;
+				background: #2e3848;
+				cursor: pointer;
+				box-shadow: inset 1em 1em 2em 0.1em #00000030, inset -1em -1em 3em 0.1em #ffffff30;
+			} 
+			html, body { 
+				-webkit-touch-callout: none; 
+				-webkit-user-select: none; 
+				user-select: none; 
+				color: #58595b; 
+				-webkit-font-smoothing: antialiased; 
+				font-family: "Roboto",sans-serif; 
+				margin: 0; 
+				border: 0; 
+				padding: 0; 
+				background: linear-gradient(175deg, #f3f4f4 0%, #e6e7e8 100%); 
+				background-color: #333; 
+				background-image: linear-gradient(335deg, #9e0b0fff 23px, transparent 23px), linear-gradient(155deg, #9e0b0fbf 23px, transparent 23px), linear-gradient(335deg, #9e0b0ff0 23px, transparent 23px), linear-gradient(155deg, #9e0b0fb0 23px, transparent 23px); 
+				background-size: 58px 58px; 
+				background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px; 
+			}
+		}
+		bg {
+			position:absolute;
+			top:0;
+			background: radial-gradient(ellipse at center, $color 0%, darken($color, 50%) 100%);
+			overflow: hidden;  
+		}
+		.noscreen {
+			visibility: hidden;
+			display: none;
+		}
+		.device {
+			width:100%;
+			height:100%;
+			vertical-align:middle;
+			text-align:-webkit-center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position:absolute;
+			top:0;
+		}
+		.device_panelopen {}
+		.paneliconcontainer {
+			justify-content: center;
+			margin-top:auto;
+			margin-bottom:auto;
+			}
+		.paneliconcontainer_noscreen {
+			display: none;
+			}
+		.panelicon {
+			cursor: pointer;
+			color:rgba(255,255,255,1);
+			font-size:3vmin;
+			margin: 1em;
+			position: relative;
+			justify-content: center;
+			vertical-align:middle;
+			align-items:center;
+			text-align:-webkit-center;
+			height: 24vmin;
+			width: 24vmin;
+			border-radius: 50%;
+			padding: 0.5em;
+			box-shadow: 0.1em 0.2em 1em -0.2em #0005, inset 1em 1em 2em 0.1em #00000030, inset -1em -1em 3em 0.1em #ffffff30;
+			display:inline-flex;
+		}
+		.panel {
+			vertical-align:middle;
+			align-items:center;
+			text-align:-webkit-center;
+			margin: auto;
+			margin-top:20px;
+			position: relative;
+			justify-content: center;
+			max-width: 120vmin;
+			min-width: 90vmin;
+			width: auto;
+			white-space: nowrap;
+			font-size:2.5vmin;
+			border-radius: 0.5em;
+			padding: 0em;
+			box-shadow: 0.1em 0.2em 1em -0.2em #0005;
+			background: linear-gradient(175deg, #f3f4f4 0%, #e6e7e8 100%);
+			margin-top:auto;
+			margin-bottom:auto;
+			}
+		.panel_hiderow {
+			max-width: 90vmin;
+			min-width: 60vmin;
+			width: auto;
+			white-space: nowrap;
+		}
+		.paneltab {
+			cursor: pointer;
+			position: relative;
+			justify-content: center;
+			width:100%;
+			display:flex;
+			border-radius: 0.6em 0.6em 0em 0em;
+			padding: 0em;
+			margin-top:auto;
+			margin-bottom:auto;
+			background:#a7a9ac;
+			}
+		.page {
+			justify-content: center;
+			border-radius: 0.5em;
+			padding: .25em;
+		}
+		.pagetab {
+			overflow:hidden;
+			position: relative;
+			justify-content: center;
+			width:100%;
+			border-radius: 0.5em 0.5em 0em 0em;
+			padding: 1em;
+			border-bottom: 0.05em solid rgba(0, 0, 0, 0.16);
+			font-size:3vmin;
+			background:transparent;
+		}
+		.pagetab_selected {
+			overflow:visible;
+			background:#f3f4f4;
+			font-weight:bold;
+			box-shadow: -0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3), 0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3)
+		}
+		.pagetab_selected:last-child {
+			box-shadow: -0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3)
+		}
+		.pagetab_selected:first-child {
+			box-shadow: 0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3)
+		}
+		.pagetab_selected:last-child:first-child {
+			box-shadow: 0em 0em 0em 0em rgba(0,0,0,0)
+		}
+		.pagetab_selected:default {
+			box-shadow: -0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3), 0.2em 0em 0.2em -0.1em rgba(0,0,0,0.3)
+		}
+		.row {
+			margin: 0.125em;
+			display: flex;
+			justify-content: center;
+		}
+		.rowlabel {
+			width:40%;
+			padding-left: 1em;
+			position: relative;
+			justify-content: left;
+			display:grid;
+			vertical-align:middle;
+			align-items:center;
+			text-align:-webkit-center;
+		}
+		.rowwidgetcontainer {
+			width:60%;
+			display: flex;
+			float:right;
+			justify-content:center;
+		}
+		.rowlabel_hiderow {
+			display:none;
+		}
+		.rowwidgetcontainer_hiderow {
+			width:100%;
+			display: flex;
+			float:right;
+			justify-content:center;
+		}
+		.button, .Button {
+			cursor: pointer;
+			height: 1em;
+			color: #fff;
+			background: linear-gradient(125deg, #1c2834 33%, #1c2834cc 100%);
+		}
+		.active {
+			cursor: pointer;
+			background: linear-gradient(125deg, rgba(28,40,52,1) 33%, rgba(28,40,52,0.8) 100%);
+		}
+		.inactive {
+			color: #58595b;
+			background: linear-gradient(125deg, #a7a9ac 33%, #a7a9accc 100%);
+		}
+		.inactive > div > small::after {
+			line-height: 1em;
+			font-size: 0.8em;
+			content:"Connect the cable to your device";
+		}
+		.selected {
+			background: linear-gradient(125deg, #9e0b0f 33%, #9e0b0fcc 100%);
+			cursor: pointer;
+		}
+		.inactive.selected {
+			color: #ffffff7f;
+			background: linear-gradient(125deg, #9e0b0f 33%, #9e0b0fcc 100%);
+		}
+		.inactive.selected > div > small::after {
+			line-height: 1em;
+			font-size: 0.8em;
+			content:"Connect the cable to your device";
+		}
+		.toggle.panelicon, .toggle.active, .toggle.widget, .toggle.widget_Icon, .toggle.widget_Navigator_ring_up, .toggle.widget_Navigator_ring_down, .toggle.widget_Navigator_ring_left, .toggle.widget_Navigator_ring_right, .toggle.widget_Navigator_ring_center {
+			animation: shakeactive 0.2s;
+		}
+		@keyframes shakeactive {
+			0% { transform: scale(1) }
+			33% { transform: scale(0.95) }
+			100% { transform: scale(1) }
+		}
+		.toggle.inactive {
+			animation: shakeinactive 0.3s;
+		}
+		@keyframes shakeinactive {
+			0% { transform: translateX(-12px) }
+			10% { transform: translateX(0px) }
+			20% { transform: translateX(10px) }
+			30% { transform: translateX(0px) }
+			40% { transform: translateX(-8px) }
+			50% { transform: translateX(0px) }
+			60% { transform: translateX(6px) }
+			70% { transform: translateX(0px) }
+			80% { transform: translateX(-4px) }
+			90% { transform: translateX(2px) }
+			100% { transform: translateX(0px) }
+			0% { transform: translateX(0px) }
+		}
+		.text {}
+		.widget_Button, .widget_Text, .widget_Icon, .widget, .widget_Slider_container {
+			margin: 0px;
+			margin-left: 0.06125em;
+			margin-right: 0.06125em;
+			display: flex;
+			float: right;
+			justify-content: center;
+			padding: 1em;
+		}.widget, .widget_Slider_container {
+			height: 1em;
+			width: 100%;
+			border-radius: 0.25em;
+		}
+		.widget_Button {
+			width: 100%;
+			border-radius: 0.25em;
+			color: #fff;
+			background: linear-gradient(125deg, rgba(28,40,52,1) 33%, rgba(28,40,52,0.8) 100%);
+		}
+		.widget_Text {
+			width: 100%;
+			border-radius: 0.25em;
+		}
+		.widget_Icon {
+			cursor: pointer;
+			width: 1.2em;
+			height: 1.2em;
+			border-radius: 50%;
+			background: linear-gradient(125deg, #1c2834 33%, #1c2834cc 100%);
+			color: #fff;
+		}
+		.widget_IconGap {
+			width: 1em;
+			color: #fff;
+		}
+		.hidden {
+			display:none;
+			visibility:hidden;
+		}
+		::-webkit-scrollbar {
+			width: 2em;
+		}
+		::-webkit-scrollbar-track {
+			box-shadow: inset 0 0 0.5em grey; 
+			border-radius: 1em;
+		}
+		::-webkit-scrollbar-thumb {
+			background: #2e3848;
+			border-radius: 1em;
+		}
+		::-webkit-scrollbar-thumb:hover {
+			background: #b30000; 
+		}
+		.prompt {
+			position:absolute;
+			font-size:2.5vmin;
+			border-radius: 0.5em;
+			box-shadow: 0.1em 0.2em 1em -0.2em #0005;
+			background: linear-gradient(175deg, #f3f4f4 0%, #e6e7e8 100%);
+			width: 90vmin;
+			white-space: nowrap;
+			padding:0.25em;
+			max-height:80vh;
+			overflow: auto;
+		}
+		.prompt_title { 
+			font-size: 3vmin; 
+			padding: 1em; 
+			border-bottom: 0.05em solid rgba(0, 0, 0, 0.16);
+		}
+		.prompt_text {
+			font-size:2.5vmin; 
+			padding:1em;
+		}
+		.prompt_pin, .prompt_input {
+			font-size:2.5vmin;
+			padding: 1em;
+			border: 1px solid rgba(0, 0, 0, 0.16);
+			text-align: center;
+			height: 2em;
+			width: -webkit-fill-available;
+			border-radius: 0.5em;
+			text-align: center;
+			margin: 0.06125em;
+			color:#385c80;
+			background: #fff;
+		}
+		.prompt_option {
+			color: #f3f4f4;
+			background: linear-gradient(125deg, #808285 33%, #808285cc 100%);
+			margin: 0.06125em;
+			height: 1em;
+			display: flex;
+			float: right;
+			justify-content: center;
+			width: -webkit-fill-available;
+			border-radius: 0.5em; 
+			padding: 1em 0em 1em 0em;
+		}
+	</style>
+	<script>
+		var rto = 10000;
+		var rtot;
+		var nX;
+		var nY;
+		var uW;
+		var uH;
+		var pt;
+		function onLoad(){
+			var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+			svg.setAttribute('width',window.innerWidth);
+			svg.setAttribute('height',window.innerHeight);
+			document.querySelector('#bg').innerHTML="";
+			if (UserInterface.Background.Clean == true) {
+			} else {if (UserInterface.Background.UsePicture == true) {
+				if(typeof(UserInterface.Background.Background)!=='undefined') {
+					if(UserInterface.Background.Background.match('data:image') != null) {
+						var backgroundpic = document.createElement('IMG');
+						backgroundpic.style='object-fit: cover; 
+						width: 100vw; 
+						height: 100vh; 
+						object-position: 50% 50%; 
+						opacity:'+UserInterface.Background.Opacity+'%';
+						backgroundpic.src = UserInterface.Background.Background;
+						document.querySelector('#bg').appendChild(backgroundpic);
+					}
+				}
+			}else {
+				document.querySelector('#bg').appendChild(svg);
+			}
+			       }
+			var defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+			svg.appendChild(defs);
+			var unitSize = (window.innerWidth+window.innerHeight)/20;
+			nX = Math.ceil(window.innerWidth/unitSize)+1;
+			nY = Math.ceil(window.innerHeight/unitSize)+1;
+			uW = Math.ceil(window.innerWidth/(nX-1));
+			uH = Math.ceil(window.innerHeight/(nY-1));
+			pt = [];
+			for(var y = 0; y < nY; y++) {
+				for(var x = 0; x < nX; x++) {
+					pt.push(
+						{
+							x:uW*x, y:uH*y, originX:uW*x, originY:uH*y
+						}
+					);
+				}
+			}
+			randomize();
+			for(var i = 0; i < pt.length; i++) {
+				if(pt[i].originX != uW*(nX-1) && pt[i].originY != uH*(nY-1)) {            
+					var tLX = pt[i].x;            
+					var tLY = pt[i].y;            
+					var tRX = pt[i+1].x;            
+					var tRY = pt[i+1].y;            
+					var bLX = pt[i+nX].x;            
+					var bLY = pt[i+nX].y;            
+					var bRX = pt[i+nX+1].x;            
+					var bRY = pt[i+nX+1].y;            
+					var rando = Math.floor(Math.random()*2);            
+					for(var n = 0; n < 2; n++) {                
+						var p = document.createElementNS(svg.namespaceURI, 'polygon');                
+						if(rando==0) {                    
+							if(n==0) { 
+								p.p1 = i; p.p2 = i+nX; p.p3 = i+nX+1; 
+								p.setAttribute('points',tLX+','+tLY+' '+bLX+','+bLY+' '+bRX+','+bRY);
+							}else if(n==1) {
+								p.p1 = i; 
+								p.p2 = i+1; 
+								p.p3 = i+nX+1; 
+								p.setAttribute('points',tLX+','+tLY+' '+tRX+','+tRY+' '+bRX+','+bRY);
+							}                
+						} else if(rando==1) {                    
+							if(n==0) { 
+								p.p1 = i; 
+								p.p2 = i+nX; 
+								p.p3 = i+1; 
+								p.setAttribute('points',tLX+','+tLY+' '+bLX+','+bLY+' '+tRX+','+tRY);
+							}else if(n==1) { 
+								p.p1 = i+nX; 
+								p.p2 = i+1; 
+								p.p3 = i+nX+1; 
+								p.setAttribute('points',bLX+','+bLY+' '+tRX+','+tRY+' '+bRX+','+bRY);
+							}                
+						}
+						p.setAttribute('fill','url(#g'+i+')');                
+						var q = document.createElementNS('http://www.w3.org/2000/svg','animate');                
+						q.setAttribute('fill','freeze');                
+						q.setAttribute('attributeName','points');                
+						q.setAttribute('dur',rto+'ms');                
+						q.setAttribute('calcMode','linear');                
+						p.appendChild(q);                
+						svg.appendChild(p);            
+					}
+					var lG = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+					lG.setAttribute('id','g'+i);
+					lG.setAttribute('x1','100%');
+					lG.setAttribute('y1','100%');
+					lG.setAttribute('x2','0%');
+					lG.setAttribute('y2','0%');
+					var alpha = Math.random();
+					var dark = (parseFloat(240)-(alpha*6));
+					var light = (parseFloat(255)-(alpha*4));
+					var st = document.createElementNS('http://www.w3.org/2000/svg','stop');
+					st.setAttribute('offset','0%');
+					st.setAttribute('style',"stop-color:rgba("+(light)+","+(light)+","+(light)+",1);stop-opacity:1");
+					lG.appendChild(st);
+					var sp = document.createElementNS('http://www.w3.org/2000/svg','stop');
+					sp.setAttribute('offset','100%');
+					sp.setAttribute('style',"stop-color:rgba("+(dark)+","+(dark)+","+(dark)+",1);stop-opacity:1");
+					lG.appendChild(sp);defs.appendChild(lG);        
+				}    
+			}
+			if (UserInterface.Background.Clean == true) {
+			}else {
+				if (UserInterface.Background.UsePicture == true) {
+				}else {
+					setTimeout(refresh(),10);
+				      }
+			}    
+		}
+		function randomize() {
+			for(var i = 0; i < pt.length; i++) {
+				if(pt[i].originX != 0 && pt[i].originX != uW*(nX-1)) {
+					pt[i].x = pt[i].originX + Math.random()*uW-uW/2;
+				}
+				if(pt[i].originY != 0 && pt[i].originY != uH*(nY-1)) {
+					pt[i].y = pt[i].originY + Math.random()*uH-uH/2;
+				}
+			}
+		}
+		function refresh() {
+			randomize();
+			for(var i = 1; i < document.querySelector('#bg svg').childNodes.length; i++) {
+				var p = document.querySelector('#bg svg').childNodes[i];
+				var q = p.childNodes[0];
+				if(q.getAttribute('to')) {
+					q.setAttribute('from',q.getAttribute('to'));
+				}
+				q.setAttribute('to',pt[p.p1].x+','+pt[p.p1].y+' '+pt[p.p2].x+','+pt[p.p2].y+' '+pt[p.p3].x+','+pt[p.p3].y);
+				q.beginElement();
+			}
+			rtot = setTimeout(function() {refresh();}, rto);
+		}
+		function onResize() {
+			document.querySelector('#bg svg').remove();
+			clearTimeout(rtot);
+			onLoad();
+		}
+		window.onopen = console.log('Opened');
+		window.onload = onLoad;
+		window.onresize = onResize;
+	</script>
+	</HEAD>
+	<BODY onload="connect()">
+		<DIV id="bg"></div>
+		<DIV id="device"></div>
+		<DIV id="logger" class="logger"></div>
+	</BODY>
+</HTML>
